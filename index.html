@@ -4,10 +4,8 @@
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
         // do stuff here
-        var imageObj = new Image();
-        imageObj.onload = function() {
-            context.drawImage(imageObj, 69, 50);
-        };
-        imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
-    </script>
+
+        context.font = 'italic 40pt Calibri';
+        context.fillText('Hello World!', 150, 100);
+   </script>
 </body>
