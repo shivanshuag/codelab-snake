@@ -11,9 +11,9 @@
         context.strokeStyle = "black";
         context.strokeRect(0, 0, w, h);
 
+        snake_array = []; //Empty array to start with
         function create_snake() {
             var length = 5; //Length of the snake
-            snake_array = []; //Empty array to start with
             for(var i = length-1; i>=0; i--) {
                 //This will create a horizontal snake starting from the top left
                 snake_array.push({x: i, y:0});
@@ -23,6 +23,10 @@
 
         var cw = 10;//cell width
         function paint() {
+            context.fillStyle= "white";
+            context.fillRect(0 , 0, w, h);
+            context.strokeStyle = "black";
+            context.strokeRect(0, 0, w, h);
             for(var i = 0; i < snake_array.length; i++) {
                 var c = snake_array[i];
                 context.fillStyle = "blue";
@@ -31,8 +35,20 @@
                 context.strokeStyle = "white";
                 context.strokeRect(c.x*cw, c.y*cw, cw, cw);
             }
-        }
-        paint();
 
+            //Pop out the tail cell and place it infront of the head cell
+            var nx = snake_array[0].x;
+            var ny = snake_array[0].y;
+            //These were the position of the head cell.
+            //We will increment it to get the new head position
+            nx++;
+            var tail = snake_array.pop(); //pops out the last cell
+            tail.x = nx;
+            tail.y = ny;
+            snake_array.unshift(tail); //puts back the tail as the first cell
+
+        }
+
+        game_loop = setInterval(paint, 60);
    </script>
 </body>
