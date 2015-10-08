@@ -20,5 +20,19 @@
             }
         }
         create_snake();   // calling the create_snake function
+
+        var cw = 10;//cell width
+        function paint() {
+            for(var i = 0; i < snake_array.length; i++) {
+                var c = snake_array[i];
+                context.fillStyle = "blue";
+                //Lets paint 10px wide cells
+                context.fillRect(c.x*cw, c.y*cw, cw, cw);
+                context.strokeStyle = "white";
+                context.strokeRect(c.x*cw, c.y*cw, cw, cw);
+            }
+        }
+        paint();
+
    </script>
 </body>
