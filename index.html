@@ -10,5 +10,15 @@
         context.fillRect(0 , 0, w, h);
         context.strokeStyle = "black";
         context.strokeRect(0, 0, w, h);
-    </script>
+
+        function create_snake() {
+            var length = 5; //Length of the snake
+            snake_array = []; //Empty array to start with
+            for(var i = length-1; i>=0; i--) {
+                //This will create a horizontal snake starting from the top left
+                snake_array.push({x: i, y:0});
+            }
+        }
+        create_snake();   // calling the create_snake function
+   </script>
 </body>
