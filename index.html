@@ -15,6 +15,7 @@
         var d = "right"; //initial direction of the snake
         var food;
         var cw = 10;//cell width
+        var game_loop = null;
         function paint_cell(x,y) {
             context.fillStyle = "blue";
             context.fillRect(x*cw, y*cw, cw, cw);
@@ -31,15 +32,15 @@
             //Because there are 45(450/10) positions accross the rows and columns
         }
         function create_snake() {
+            snake_array = [];
             var length = 5; //Length of the snake
             for(var i = length-1; i>=0; i--) {
                 //This will create a horizontal snake starting from the top left
                 snake_array.push({x: i, y:0});
             }
         }
-        create_snake();   // calling the create_snake function
-        create_food();
         function paint() {
+
             context.fillStyle= "white";
             context.fillRect(0 , 0, w, h);
             context.strokeStyle = "black";
@@ -54,6 +55,13 @@
             var nx = snake_array[0].x;
             var ny = snake_array[0].y;
             //These were the position of the head cell.
+            // Check if a collision has occured
+            if(nx==-1 || nx==w/cw || ny==-1 || ny==h/cw) {
+                // clear the game loop
+                clearInterval(game_loop);
+                init();
+                return;
+            }
             //We will increment it to get the new head position
             if(d == "right") nx++;
             else if(d == "left") nx--;
@@ -81,6 +89,12 @@
             else if(key == "40" && d != "up") d= "down";
 };
 
-        game_loop = setInterval(paint, 60);
-   </script>
+        function init() {
+            d = "right"; //default direction
+            create_snake();
+            create_food();
+            game_loop = setInterval(paint, 60);
+        }
+        init();
+    </script>
 </body>
