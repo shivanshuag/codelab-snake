@@ -59,9 +59,16 @@
             else if(d == "left") nx--;
             else if(d == "up") ny--;
             else if(d == "down") ny++;
-            var tail = snake_array.pop(); //pops out the last cell
-            tail.x = nx;
-            tail.y = ny;
+
+            if(nx == food.x && ny == food.y) {
+                var tail = {x: nx, y: ny};
+                //Create new food
+                create_food();
+            }
+            else {
+                var tail = snake_array.pop(); //pops out the last cell
+                tail.x = nx; tail.y = ny;
+            }
             snake_array.unshift(tail); //puts back the tail as the first cell
 
         }
