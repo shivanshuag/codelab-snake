@@ -1,11 +1,14 @@
 <body>
-    <canvas id="myCanvas" width="578" height="200"></canvas>
+    <canvas id="myCanvas" width="450" height="450"></canvas>
     <script>
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
-        // do stuff here
+        var w = canvas.width
+        var h = canvas.height
 
-        context.font = 'italic 40pt Calibri';
-        context.fillText('Hello World!', 150, 100);
-   </script>
+        context.fillStyle= "white";
+        context.fillRect(0 , 0, w, h);
+        context.strokeStyle = "black";
+        context.strokeRect(0, 0, w, h);
+    </script>
 </body>
