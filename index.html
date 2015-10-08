@@ -13,6 +13,23 @@
 
         snake_array = []; //Empty array to start with
         var d = "right"; //initial direction of the snake
+        var food;
+        var cw = 10;//cell width
+        function paint_cell(x,y) {
+            context.fillStyle = "blue";
+            context.fillRect(x*cw, y*cw, cw, cw);
+            context.strokeStyle = "white";
+            context.strokeRect(x*cw, y*cw, cw, cw);
+        }
+
+        function create_food() {
+            food = {
+                x: Math.floor(Math.random()*(w-cw)/cw),
+                y: Math.floor(Math.random()*(h-cw)/cw),
+            };
+            //This will create a cell with x and y between 0-44
+            //Because there are 45(450/10) positions accross the rows and columns
+        }
         function create_snake() {
             var length = 5; //Length of the snake
             for(var i = length-1; i>=0; i--) {
@@ -21,8 +38,7 @@
             }
         }
         create_snake();   // calling the create_snake function
-
-        var cw = 10;//cell width
+        create_food();
         function paint() {
             context.fillStyle= "white";
             context.fillRect(0 , 0, w, h);
@@ -30,12 +46,9 @@
             context.strokeRect(0, 0, w, h);
             for(var i = 0; i < snake_array.length; i++) {
                 var c = snake_array[i];
-                context.fillStyle = "blue";
-                //Lets paint 10px wide cells
-                context.fillRect(c.x*cw, c.y*cw, cw, cw);
-                context.strokeStyle = "white";
-                context.strokeRect(c.x*cw, c.y*cw, cw, cw);
+                paint_cell(c.x,c.y)
             }
+            paint_cell(food.x, food.y);
 
             //Pop out the tail cell and place it infront of the head cell
             var nx = snake_array[0].x;
